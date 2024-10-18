@@ -9,6 +9,15 @@
  */
 
 
+class CustomCreateObject{
+
+}
+
+function CreateObjectFunction(){}
+
+const customObjectByFunction = new CreateObjectFunction()
+
+const customObject =  new CustomCreateObject()
 // 비어있다고 판단하는 값들
 const isFalsyValue = null | undefined | ""
 
@@ -30,7 +39,7 @@ function solution(value){
 // value가 객체인 경우, 비어있는 값을 검사하는 함수
 function validateObject(object) {
 
-    if(object.constructor===Object) {
+    if(typeof object==="object") {
         // 속성 자체가 없는지 검사
         if (Object.keys(object).length === 0) {
             console.error("객체에 속성 자체가 없습니다.")
@@ -40,7 +49,6 @@ function validateObject(object) {
         for (const key in object) {
             // 속성값이 배열일때, 빈값 검사
             validateArray(object[key])
-
 
             // 속성 값이 없는지 검사
             if (object[key] === isFalsyValue) {
@@ -69,7 +77,6 @@ function validateArray(value){
         else{
             for(const val of value){
                 if(typeof val ==="object"){
-                    console.log("배열 검사 함수 > 겍체요소 검사")
                     validateObject(val)
 
                 }
@@ -104,10 +111,13 @@ const value = []
 // solution(value)
 
 
+// console.log("customobject :",customObject.constructor)
+// console.log("customobjectByFunction :",customObjectByFunction.constructor===CreateObjectFunction)
 /**
  * 예시 입출력
  */
-solution(null)
-// solution({}) === true
-// solution(0) === false
-// solution([{},{a:[]}]) === true
+// solution(null)
+// solution({})
+// solution(0)
+// solution([{},{a:[]}])
+solution([{}])
