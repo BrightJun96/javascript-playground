@@ -49,6 +49,7 @@ function validateObject(object) {
         for (const key in object) {
             // 속성값이 배열일때, 빈값 검사
             validateArray(object[key])
+            validateObject(object[key])
 
             // 속성 값이 없는지 검사
             if (object[key] === isFalsyValue) {
@@ -76,10 +77,7 @@ function validateArray(value){
         }
         else{
             for(const val of value){
-                if(typeof val ==="object"){
-                    validateObject(val)
-
-                }
+                validateObject(val)
             }
         }
 
@@ -120,4 +118,6 @@ const value = []
 // solution({})
 // solution(0)
 // solution([{},{a:[]}])
-solution([{}])
+solution([{a:{a:{
+    a:{}
+        }}}])
