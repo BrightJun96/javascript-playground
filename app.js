@@ -15,34 +15,62 @@ const isFalsyValue = null | undefined | ""
 
 function solution(value){
 
+    // 원시값 검사
+    if(validatePrimitive(value)) return
+
+    // 배열 검사
+     if(validateArray(value)) return
+
+    // 객체 검사
+    if(validateObject(value)) return
+
+}
 
 
+// value가 객체인 경우, 비어있는 값을 검사하는 함수
+function validateObject(object) {
 
-    // // 속성 자체가 없는지 검사
-    // const isNoKeysInObject= Object.keys(value).length === 0
-    // if(isNoKeysInObject){
-    //     console.error("객체에 속성 자체가 없습니다.")
-    //     return isNoKeysInObject
-    // }
-    // // 속성 값이 없는지 검사
-    // const isNoValuesInObject =Object.values(value).every(v => v === null|undefined)
-    // if(isNoValuesInObject){
-    //     console.error("객체의 속성 값이 없습니다.")
-    //     return isNoValuesInObject
-    // }
+    if(object.constructor===Object) {
+        // 속성 자체가 없는지 검사
+        if (Object.keys(object).length === 0) {
+            console.error("객체에 속성 자체가 없습니다.")
+            return true
+        }
 
-
+        for (const key in object) {
+            // 속성값이 배열일때, 빈값 검사
+            validateArray(object[key])
 
 
-    // value가 배열인 경우
+            // 속성 값이 없는지 검사
+            if (object[key] === isFalsyValue) {
+                console.error("객체에 속성값이 존재하지 않습니다.")
+                return true
+            }
+        }
+    }
+    else{
+        return false
+    }
+
+}
+
+
+// value가 배열인 경우
+function validateArray(value){
+    // console.log("배열 검사 함수 실행중")
+    // value가 배열인 경우,비어있는 값을 검사하는 함수
     if(Array.isArray(value)){
         // 모든 요소가 비어있으면 비어있다고 간주
-        if(value.length>0){
+        if(value.length===0){
             console.error("배열 길이가 0입니다.")
             return true
-        }else{
+        }
+        else{
             for(const val of value){
                 if(typeof val ==="object"){
+                    console.log("배열 검사 함수 > 겍체요소 검사")
+                    validateObject(val)
 
                 }
             }
@@ -50,47 +78,36 @@ function solution(value){
 
     }
 
-
-    if(typeof value === 'object'){
-        validateObject(value)
-    }
-
-
-
 }
 
 
-// value가 객체인 경우, 비어있는 값을 검사하는 함수
-function validateObject(object) {
-    // console.log("validateObject 함수 실행중")
-    for(const key in object) {
-        // console.log("validateObject 함수 내부 반복문 실행 중")
-
-        // 속성이 존재하면 false 반환
-        if(object[key]){
-            return false
-        }
-
-        // 속성 값이 없는지 검사
-        if(object[key]===isFalsyValue){
-            console.error("객체에 속성값이 존재하지 않습니다.")
-            return true
-        }
+// value가 원시값인 경우
+function validatePrimitive(value){
+    if(typeof value ==="string" && value===""){
+        console.error("빈 문자열입니다.")
+        return true
     }
-    // 속성 자체가 없는지 검사
-    console.error("객체에 속성 자체가 없습니다.")
-    return true
-
+    if(value ===null ){
+        console.error("null 값이 존재합니다.")
+        return true
+    }
+    if(value===undefined){
+        console.error("undefined 값이 존재합니다.")
+        return true
+    }
 }
 
-const obj ={a:1}
-validateObject(obj)
+
+
+const value = []
+
+// solution(value)
 
 
 /**
  * 예시 입출력
  */
-// solution(null) === false
+solution(null)
 // solution({}) === true
 // solution(0) === false
 // solution([{},{a:[]}]) === true
