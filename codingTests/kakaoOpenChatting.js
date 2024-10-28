@@ -45,23 +45,46 @@ function solution(record) {
     console.log("userRecord",userRecord)
     for(const key in userRecord){
 
-        const Enter = userRecord["Enter"]
-        const Change = userRecord["Change"]
-        const Leave = userRecord["Leave"]
+        console.log("key :",key)
+        const Enter = userRecord[key]["Enter"]
+        const Change = userRecord[key]["Change"]
+        const Leave = userRecord[key]["Leave"]
 
+        /**
+         * 들어와있는 상태에서 닉네임이 변경되었을 때
+         */
         if(Change&& (Enter!==Change)){
-            console.log("실행")
             nicknameChangeUsers.push({[key]:Change})
 
         }
 
+        /**
+         * 나갔는데 들어왔을 때, 닉네임이 변경하고 들어왔을 때
+         * 나갔을 때 닉네임과 들어왔을 때 닉네임이 다르다면 닉네임을 변경하고 들어왔다고 간주할 수 있음.
+         */
+        if(Leave && (Enter!==Leave)){
+            nicknameChangeUsers.push({[key]:Leave})
+        }
+
+
+
     }
 
 
+    record.filter((rec) => {
+        const splitedRecord = rec.split(" ")
+        const action =  splitedRecord[0]
+        const id =  splitedRecord[1]
+        const nickname = splitedRecord[2]
+        
+
+    })
     console.log("nicknameChangeUsers",nicknameChangeUsers)
 
 
 }
 
 const record =["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]
+
+
 solution(record)
