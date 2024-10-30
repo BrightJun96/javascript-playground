@@ -64,7 +64,7 @@ function solution(record) {
          * 나갔을 때 닉네임과 들어왔을 때 닉네임이 다르다면 닉네임을 변경하고 들어왔다고 간주할 수 있음.
          */
         if(Leave && (Enter!==Leave)){
-            nicknameChangeUsers.push({[key]:Leave})
+            nicknameChangeUsers.push({[key]:Enter})
         }
 
 
@@ -73,20 +73,35 @@ function solution(record) {
 
 
 
-    record.filter((rec) => {
+   return record
+       .filter((rec) => rec.split(" ")[0]!=="Change")
+       .map((rec) => {
         const splitedRecord = rec.split(" ")
         const action =  splitedRecord[0]
         const id =  splitedRecord[1]
         const nickname = splitedRecord[2]
 
+      const changeUser =   nicknameChangeUsers.find((user) => user[id])
+        console.log("changeUser",changeUser)
+
+       switch (action) {
+           case "Enter":
+               return `${changeUser[id]}님이 들어왔습니다.`
+           case "Leave":
+                return `${changeUser[id]}님이 나갔습니다.`
+           default:
+               break;
+       }
+
 
     })
-    console.log("nicknameChangeUsers",nicknameChangeUsers)
 
+    // nicknameChangeUsers의 배열 중 id가 같은 게 있다면 해당 닉네임으로 교체
 
 }
 
 const record =["Enter uid1234 Muzi", "Enter uid4567 Prodo","Leave uid1234","Enter uid1234 Prodo","Change uid4567 Ryan"]
 
 
-solution(record)
+const result =  solution(record)
+console.log("result",result)
