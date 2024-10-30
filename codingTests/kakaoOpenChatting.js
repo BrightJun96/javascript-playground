@@ -36,7 +36,8 @@ function solution(record) {
         const id =  splitedRecord[1]
         const nickname = splitedRecord[2]
 
-        userRecord[id] = {...userRecord[id] ,[action]:nickname??null}
+        // action이 나가기라면 이전 들어왔던 닉네임을 가져와 할당
+        userRecord[id] = {...userRecord[id] ,[action]:action==="Leave"?userRecord[id]["Enter"]:nickname}
 
     }
 
@@ -71,12 +72,13 @@ function solution(record) {
     }
 
 
+
     record.filter((rec) => {
         const splitedRecord = rec.split(" ")
         const action =  splitedRecord[0]
         const id =  splitedRecord[1]
         const nickname = splitedRecord[2]
-        
+
 
     })
     console.log("nicknameChangeUsers",nicknameChangeUsers)
