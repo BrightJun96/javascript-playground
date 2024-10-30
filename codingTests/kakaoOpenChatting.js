@@ -83,12 +83,13 @@ function solution(record) {
 
       const changeUser =   nicknameChangeUsers.find((user) => user[id])
         console.log("changeUser",changeUser)
+           const processedUser = changeUser?changeUser[id]:nickname
 
        switch (action) {
            case "Enter":
-               return `${changeUser[id]}님이 들어왔습니다.`
+               return `${processedUser}님이 들어왔습니다.`
            case "Leave":
-                return `${changeUser[id]}님이 나갔습니다.`
+                return `${processedUser}님이 나갔습니다.`
            default:
                break;
        }
