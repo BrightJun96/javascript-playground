@@ -1,4 +1,4 @@
-const orderedArray = [3,17,80,202]
+const search = [3,17,80,202]
 
 // 정렬된 배열의 검색
 /**
@@ -29,4 +29,4 @@ function searchOrderedArray(arr, target) {
     }
 }
 
-searchOrderedArray(orderedArray, 201)
+searchOrderedArray(search, 201)
