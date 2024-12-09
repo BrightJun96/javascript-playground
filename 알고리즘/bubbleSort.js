@@ -1,5 +1,5 @@
 
-console.log("Memory Usage Before Array Allocation:", process.memoryUsage());
+// console.log("Memory Usage Before Array Allocation:", process.memoryUsage());
 
 function bubbleSort(list) {
 
@@ -22,7 +22,7 @@ function bubbleSort(list) {
             }
 
         }
-
+        lastIndex = lastIndex-1
 
     }
 
@@ -33,5 +33,5 @@ function bubbleSort(list) {
 const unOrderedArray = [5,2,10,6,4]
 
 const sortArr = bubbleSort(unOrderedArray)
-// console.log("sortArr ",sortArr)
-console.log("Memory Usage After Array Allocation:", process.memoryUsage());
+console.log("sortArr ",sortArr)
+// console.log("Memory Usage After Array Allocation:", process.memoryUsage());
