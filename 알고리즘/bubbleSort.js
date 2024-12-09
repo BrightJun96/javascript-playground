@@ -1,6 +1,9 @@
 
 // console.log("Memory Usage Before Array Allocation:", process.memoryUsage());
 
+/**
+ * 배열 중 가장 큰 값이 반복문마다 제일 상단으로 올라간다하여 버블 정렬이라함.
+ */
 function bubbleSort(list) {
 
     let lastIndex = list.length;
