@@ -8,11 +8,12 @@ function bubbleSort(list) {
 
     while (!sorted){
         sorted = true
+
         for(let i=0;i<lastIndex;i++){
+           let firstItem = list[i];
 
             if(list[i]>list[i+1]){
 
-                let firstItem = list[i];
                 list[i] = list[i + 1];
                 list[i+1] = firstItem;
                 sorted=false;
